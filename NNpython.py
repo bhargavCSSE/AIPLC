@@ -27,8 +27,8 @@ def ArraySplit(array, RowLow, RowHigh, ColLow, ColHigh):
 	return SplitArray
 
 X = ReadFileaAndReturnArray('data.txt', 4, 3)
-#print X
-#X = ArraySplit(X, 0, 4, 0, 2)
+print X
+X = ArraySplit(X, 0, 4, 0, 2)
 print X
 x = np.array([[0,0,1],
  	[0,1,1],
