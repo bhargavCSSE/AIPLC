@@ -1,10 +1,10 @@
 import numpy as np
 
 def nonlin(x, deriv=False):
-	if(deriv==True):
- 		return (x*(1-x))
+    if(deriv==True):
+        return (x*(1-x))
 
-  	return 1/(1+np.exp(-x))
+    return 1/(1+np.exp(-x))
 
 def ReadFileaAndReturnArray(filename, row, col):
 	file = open(filename,"r")
@@ -26,14 +26,14 @@ def ArraySplit(array, RowLow, RowHigh, ColLow, ColHigh):
 			SplitArray[row][col] = array[row][col]
 	return SplitArray
 
-X = ReadFileaAndReturnArray('data.txt', 4, 3)
+#X = ReadFileaAndReturnArray('data.txt', 4, 3)
 #print X
 #X = ArraySplit(X, 0, 4, 0, 2)
 #print X
 x = np.array([[0,0,1],
- 	[0,1,1],
- 	[1,0,1],
- 	[1,1,1]])
+              [0,1,1],
+              [1,0,1],
+              [1,1,1]])
 
 y = np.array([[1],[1],[1],[0]])
 
@@ -48,7 +48,7 @@ syn1 = 2*np.random.random((4,1)) - 1
 
 #traning
 
-for j in xrange(60000):
+for j in range(60000):
 
 	#layers
 	l0 = x
@@ -68,5 +68,5 @@ for j in xrange(60000):
 	syn1 += l1.T.dot(l2_delta)
 	syn0 += l0.T.dot(l1_delta)
 
-print 'Output after training'
-print l2
+print ('Output after training')
+print (l2)
