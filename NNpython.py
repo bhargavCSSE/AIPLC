@@ -35,7 +35,7 @@ x = np.array([[0,0,1],
  	[1,0,1],
  	[1,1,1]])
 
-y = np.array([[0],[1],[1],[0]])
+y = np.array([[1],[1],[1],[0]])
 
 #seed
 
@@ -57,8 +57,8 @@ for j in xrange(60000):
 
 	#backpropagation
 	l2_error = y - l2
-	if (j%10000) == 0:
-		print 'Error:' + str(np.mean(np.abs(l2_error)))
+	if (j%1000) == 0:
+            print ('Error at iter ' + str(j) + ':' + str(np.mean(np.abs(l2_error))))
 
 	l2_delta = l2_error * nonlin(l2, deriv=True)
 	l1_error = l2_delta.dot(syn1.T)
