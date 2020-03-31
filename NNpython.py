@@ -6,6 +6,14 @@ def nonlin(x, deriv=False):
 
     return 1/(1+np.exp(-x))
 
+def step(x, deriv=False):
+	if(deriv==True):
+		x[x < 0] = 0
+		return x
+	x[x<0.5] = 0
+	x[x>=0.5] = 1
+	return x
+
 def ReadFileaAndReturnArray(filename, row, col):
 	file = open(filename,"r")
 	filestring = file.read()
@@ -30,21 +38,37 @@ def ArraySplit(array, RowLow, RowHigh, ColLow, ColHigh):
 #print X
 #X = ArraySplit(X, 0, 4, 0, 2)
 #print X
-x = np.array([[0,0,1],
-              [0,1,1],
-              [1,0,1],
-              [1,1,1]])
+x = np.array([
+             [0, 0, 0, 0, 1],
+             [0, 0, 0, 1, 1],
+             [0, 0, 1, 0, 1],
+             [0, 0, 1, 1, 1],
+             [0, 1, 0, 0, 1],
+             [0, 1, 0, 1, 1],
+             [0, 1, 1, 0, 1],
+             [0, 1, 1, 1, 1],
+             [1, 0, 0, 0, 1],
+             [1, 0, 0, 1, 1],
+             [1, 0, 1, 0, 1],
+             [1, 0, 1, 1, 1], 
+			 [1, 1, 0, 0, 1],
+             [1, 1, 0, 1, 1],
+             [1, 1, 1, 0, 1],
+             [1, 1, 1, 1, 1]])
 
-y = np.array([[1],[1],[1],[0]])
+y = np.array([[0], [1], [1], [1], [1], [0], [0], [0],
+              [0], [1], [1], [1], [0], [0], [0], [0]])
 
+# x[x == 0] = -1
+# y[y == 0] = -1
 #seed
 
 np.random.seed(1)
 
 #synapses
 
-syn0 = 2*np.random.random((3,4)) - 1
-syn1 = 2*np.random.random((4,1)) - 1
+syn0 = 2*np.random.random((5,3)) - 1
+syn1 = 2*np.random.random((3,1)) - 1
 
 #traning
 
@@ -69,4 +93,13 @@ for j in range(60000):
 	syn0 += l0.T.dot(l1_delta)
 
 print ('Output after training')
-print (l2)
+# print (l2)
+# print (syn0)
+# print(syn1)
+
+l0 = x
+l1 = step(np.dot(l0, syn0))
+l2 = step(np.dot(l1, syn1))
+print(syn0)
+print(syn1)
+print(l2)
